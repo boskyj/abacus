@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="1dp">
+
+        <EditText
+            android:id="@+id/start"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="8"
+            android:ems="10"
+            android:hint="Start"
+            android:inputType="numberSigned" />
+
+        <EditText
+            android:id="@+id/end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="8"
+            android:ems="10"
+            android:hint="End"
+            android:inputType="numberSigned" />
+
+        <EditText
+            android:id="@+id/row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:maxLength="2"
+            android:hint="Rows"
+            android:inputType="numberSigned" />
+
+        <EditText
+            android:id="@+id/questionCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:maxLength="2"
+            android:hint="Number of Questions"
+            android:inputType="numberSigned" />
+
+        <EditText
+            android:id="@+id/questionDelay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:maxLength="1"
+            android:hint="Question Delay"
+            android:inputType="numberSigned" />
+
+        <EditText
+            android:id="@+id/answerDelay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:maxLength="1"
+            android:hint="Answer Delay"
+            android:inputType="numberSigned" />
+
+        <RadioGroup
+            android:id="@+id/operationGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/sumId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:textSize="24dp"
+                android:checked="true"/>
+
+            <RadioButton
+                android:id="@+id/lessId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24dp"
+                android:text="+ And -" />
+
+            <RadioButton
+                android:id="@+id/mulId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24dp"
+                android:text="*" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="start"
+            android:text="Start" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
