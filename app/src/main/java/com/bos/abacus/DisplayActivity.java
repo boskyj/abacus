@@ -26,6 +26,7 @@ public class DisplayActivity extends AppCompatActivity implements AbacusHandler 
     private Thread calculationThread;
     private DisplayTask displayTask;
     private boolean ansDisplay;
+    private boolean paused = false;
      @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,13 +37,26 @@ public class DisplayActivity extends AppCompatActivity implements AbacusHandler 
         displayTask = new DisplayTask();
         displayTask.setTextView(abView);
         abView.setMovementMethod(new ScrollingMovementMethod());
+         startAbacus();
     }
 
     @Override
     protected void onResume() {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         super.onResume();
-        startAbacus();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        Log.d("Abacus","resume");
+        if(paused) {
+     //       abacus.resume();
+            paused=false;
+        }
+     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+     //   abacus.pause();
+        paused=true;
+        Log.d("Abacus","pause");
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
 

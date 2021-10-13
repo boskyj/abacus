@@ -16,24 +16,12 @@ public class Abacus {
     private int answerDelay;
     private AbacusHandler handler;
     private boolean stop;
+    private final Object lock = new Object();
+    private volatile boolean paused = false;
 
     public Abacus() {
     }
 
-    public static void main(String[] args) {
-
-        Abacus abacus = new Abacus();
-        abacus.start = 1;
-        abacus.end = 9;
-        abacus.count = 3;
-        abacus.repeatCount = 20;
-        abacus.questionDelay = 3;
-        abacus.answerDelay = 6;
-        for (int i = 0; i < abacus.repeatCount; i++) {
-            abacus.doMultiplication();
-        }
-
-    }
 
     public static Abacus getInstance() {
         if (instance == null) {
@@ -76,18 +64,32 @@ public class Abacus {
                     break;
                 default:
                     for (int i = 0; i < repeatCount; i++) {
-                        if (stop) {
-                            Log.d("Abacus", "Sum stopped");
-                            break;
+                        synchronized (lock) {
+                            if(paused) {
+                                wait();
+                            }
+                            if (stop) {
+                                Log.d("Abacus", "Sum stopped");
+                                break;
+                            }
+                            doSum();
                         }
-                        doSum();
                     }
             }
             handler.onCalculationEnd();
-        }catch (AbacusException e){
+        }catch (AbacusException|InterruptedException e){
             Log.e("Abacus",e.getMessage());
         }
 
+    }
+    public void pause() {
+          paused = true;
+    }
+    public void resume() {
+        synchronized (lock) {
+            paused = false;
+            lock.notifyAll();
+        }
     }
 
     public void setStop(boolean stop){
